@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{d684d3e2-9035-4998-bb00-18c0e03612c9}</ProjectGuid>
-    <RootNamespace>Array</RootNamespace>
+    <ProjectGuid>{bcc66e6b-990e-413a-8dd8-30c19f578fbd}</ProjectGuid>
+    <RootNamespace>TArray</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,10 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Array.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Array.cpp" />
+    <ClCompile Include="TArray.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

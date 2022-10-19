@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+ï»¿#define _CRT_SECURE_NO_WARNINGS
 #include "CustomString.h"
 #include <cassert>
 #include <iostream>
@@ -31,7 +31,7 @@ CustomString::CustomString(const char* another)
         while ((*temp++ = *another++) != '\0');
         this->_str[this->_size] = '\0';
     }
-    //std::cout << "µ÷ÓÃ¹¹Ôìº¯Êı"<<std::endl;
+    //std::cout << "è°ƒç”¨æ„é€ å‡½æ•°"<<std::endl;
 }
 
 CustomString::CustomString(const CustomString& another)
@@ -51,13 +51,13 @@ CustomString::CustomString(const CustomString& another)
     if (another._size > 0)
         while ((*r++ = *temp++) != '\0');
     //printf("%s", another._str);
-    //std::cout << "µ÷ÓÃ¿½±´¹¹Ôìº¯Êı"<<std::endl;
+    //std::cout << "è°ƒç”¨æ‹·è´æ„é€ å‡½æ•°"<<std::endl;
 }
 
 CustomString::~CustomString()
 {
     delete[]  _str;
-    //cout << "µ÷ÓÃÎö¹¹º¯Êı" << endl;
+    //cout << "è°ƒç”¨ææ„å‡½æ•°" << endl;
 }
 
 CustomString& CustomString::operator=(const char* another)
@@ -77,7 +77,7 @@ CustomString& CustomString::operator=(const CustomString& another)
 {
     if (this != &another)
     {
-        delete[] _str;    //ÊÍ·ÅÔ­ÓĞÄÚ´æ
+        delete[] _str;    //é‡Šæ”¾åŸæœ‰å†…å­˜
         if (!another._str)
         {
             _str = nullptr;
@@ -122,15 +122,15 @@ CustomString CustomString::sub(int index, int length)
 {
     //delete[] _str;
     if (index > this->_size - 1) {
-        cout << "subËùÑ¡ÆğÊ¼ÏÂ±ê²»ºÏ·¨" << endl;
+        cout << "subæ‰€é€‰èµ·å§‹ä¸‹æ ‡ä¸åˆæ³•" << endl;
         return nullptr;
     }
     if (index + length > this->_size) {
-        cout << "subËùÑ¡½ØÈ¡³¤¶È²»ºÏ·¨" << endl;
+        cout << "subæ‰€é€‰æˆªå–é•¿åº¦ä¸åˆæ³•" << endl;
         return nullptr;
     }
 
-    int last_index = std::min(index + length, _size) - 1;//lengthÔ½½çÓ¦¸Ã¾¯¸æ£¬ÒÑÆúÓÃ
+    int last_index = std::min(index + length, _size) - 1;//lengthè¶Šç•Œåº”è¯¥è­¦å‘Šï¼Œå·²å¼ƒç”¨
     int new_size = last_index - index + 1;
     char* new_str = new char[new_size + 1];
     for (int i = index, j = 0; i <= last_index; i++, j++)
@@ -153,7 +153,7 @@ CustomString& CustomString::append(const char* another)
     while ((*temp++ = *_str++) != '\0');
     temp--;
     while ((*temp++ = *another++) != '\0');
-    //delete[] _str;//ÕâÀïÖĞ¶Ï,»áÓĞÄÚ´æËéÆ¬Âğ£¿
+    //delete[] _str;//è¿™é‡Œä¸­æ–­,ä¼šæœ‰å†…å­˜ç¢ç‰‡å—ï¼Ÿ
     _str = std::move(new_str);
     _size = new_size;
     return *this;
@@ -184,26 +184,26 @@ int CustomString::find(const char* another, int _index)
     }
     int new_size = index;
     int next[10];
-    Next(another, next);//¸ù¾İÄ£Ê½´®another,³õÊ¼»¯nextÊı×é
+    Next(another, next);//æ ¹æ®æ¨¡å¼ä¸²another,åˆå§‹åŒ–nextæ•°ç»„
     int i = _index + 1;
     int j = 1;
     while (i <= _size && j <= new_size) {
-        //j==0:´ú±íÄ£Ê½´®µÄµÚÒ»¸ö×Ö·û¾ÍºÍµ±Ç°²âÊÔµÄ×Ö·û²»ÏàµÈ£»_str[i-1]==another[j-1],Èç¹û¶ÔÓ¦Î»ÖÃ×Ö·ûÏàµÈ£¬Á½ÖÖÇé¿öÏÂ£¬Ö¸Ïòµ±Ç°²âÊÔµÄÁ½¸öÖ¸ÕëÏÂ±êiºÍj¶¼ÏòºóÒÆ
+        //j==0:ä»£è¡¨æ¨¡å¼ä¸²çš„ç¬¬ä¸€ä¸ªå­—ç¬¦å°±å’Œå½“å‰æµ‹è¯•çš„å­—ç¬¦ä¸ç›¸ç­‰ï¼›_str[i-1]==another[j-1],å¦‚æœå¯¹åº”ä½ç½®å­—ç¬¦ç›¸ç­‰ï¼Œä¸¤ç§æƒ…å†µä¸‹ï¼ŒæŒ‡å‘å½“å‰æµ‹è¯•çš„ä¸¤ä¸ªæŒ‡é’ˆä¸‹æ ‡iå’Œjéƒ½å‘åç§»
         if (j == 0 || _str[i - 1] == another[j - 1]) {
             i++;
             j++;
         }
         else {
-            j = next[j];//Èç¹û²âÊÔµÄÁ½¸ö×Ö·û²»ÏàµÈ£¬i²»¶¯£¬j±äÎªµ±Ç°²âÊÔ×Ö·û´®µÄnextÖµ
+            j = next[j];//å¦‚æœæµ‹è¯•çš„ä¸¤ä¸ªå­—ç¬¦ä¸ç›¸ç­‰ï¼Œiä¸åŠ¨ï¼Œjå˜ä¸ºå½“å‰æµ‹è¯•å­—ç¬¦ä¸²çš„nextå€¼
         }
     }
-    if (j > new_size) {//Èç¹ûÌõ¼şÎªÕæ£¬ËµÃ÷Æ¥Åä³É¹¦
+    if (j > new_size) {//å¦‚æœæ¡ä»¶ä¸ºçœŸï¼Œè¯´æ˜åŒ¹é…æˆåŠŸ
         return i - new_size - 1;
     }
     return -1;
 }
 
-//ÒÔÏÂ¹¹ÔìºÍ¿½±´¹¹Ôìµ÷ÓÃ´ÎÊıÎªÔÚ´ı·Ö¸î×Ö·û´®Îª"test1,test2,test3"Ê±
+//ä»¥ä¸‹æ„é€ å’Œæ‹·è´æ„é€ è°ƒç”¨æ¬¡æ•°ä¸ºåœ¨å¾…åˆ†å‰²å­—ç¬¦ä¸²ä¸º"test1,test2,test3"æ—¶
 CustomString* CustomString::split(const char* another)
 {
     std::vector<CustomString> elems;
@@ -212,44 +212,44 @@ CustomString* CustomString::split(const char* another)
     while (another[another_len] != '\0') {
         another_len++;
     }
-    //char* pos_str = _str;//Ôİ´æ_strÆğµã£¬ÒÑÆúÓÃ
+    //char* pos_str = _str;//æš‚å­˜_strèµ·ç‚¹ï¼Œå·²å¼ƒç”¨
     int index = 0;
     if (this->find(another, 0) == 0) {
-        index = another_len;//ÌØÊâ´¦ÀíÄ£Ê½´®ÔÚ×îÇ°µÄÇé¿ö
+        index = another_len;//ç‰¹æ®Šå¤„ç†æ¨¡å¼ä¸²åœ¨æœ€å‰çš„æƒ…å†µ
     }
-    int last_index = this->find(another, index);//ÏÂ±ê´ÓindexÆäÕÒµ½´ı²éÕÒ×Ö·û´®µÄÆğÊ¼ÏÂ±ê
-    int length = last_index - index;//´ı½ØÈ¡µÄ×Ö·û´®³¤¶È
-    if (length > 0) {//ÅÅ³ıÁ½¸öÄ£Ê½´®¼äÎª¿ÕµÄÇé¿ö
-        CustomString sub1 = this->sub(index, length);//µ÷ÓÃÒ»´Î¹¹Ôìº¯Êı
-        elems.push_back(sub1);//µ÷ÓÃÒ»´Î¿½±´¹¹Ôìº¯Êı
+    int last_index = this->find(another, index);//ä¸‹æ ‡ä»indexå…¶æ‰¾åˆ°å¾…æŸ¥æ‰¾å­—ç¬¦ä¸²çš„èµ·å§‹ä¸‹æ ‡
+    int length = last_index - index;//å¾…æˆªå–çš„å­—ç¬¦ä¸²é•¿åº¦
+    if (length > 0) {//æ’é™¤ä¸¤ä¸ªæ¨¡å¼ä¸²é—´ä¸ºç©ºçš„æƒ…å†µ
+        CustomString sub1 = this->sub(index, length);//è°ƒç”¨ä¸€æ¬¡æ„é€ å‡½æ•°
+        elems.push_back(sub1);//è°ƒç”¨ä¸€æ¬¡æ‹·è´æ„é€ å‡½æ•°
     }
     //cout << "Vector Capacity:" << elems.capacity() << endl;
     while (last_index != -1) {
-        //index = std::min(last_index + another_len, this->_size - 1);//ÏÂ±ê²»ÄÜÔ½Î»
+        //index = std::min(last_index + another_len, this->_size - 1);//ä¸‹æ ‡ä¸èƒ½è¶Šä½
         index = last_index + another_len;
-        //_str = _str + last_index + another_len;//Ö®Ç°ÏëÍ¨¹ı±ä_str¸Ä±äfindµÄÆğÊ¼Î»ÖÃ£¬·¢ÏÖĞĞ²»Í¨£¬ÒÑÆúÓÃ
+        //_str = _str + last_index + another_len;//ä¹‹å‰æƒ³é€šè¿‡å˜_stræ”¹å˜findçš„èµ·å§‹ä½ç½®ï¼Œå‘ç°è¡Œä¸é€šï¼Œå·²å¼ƒç”¨
         last_index = this->find(another, index);
         if (last_index != -1) {
             int length = last_index - index;
             if (length > 0) {
-                CustomString sub1 = this->sub(index, length);//µ÷ÓÃÒ»´Î¹¹Ôìº¯Êı
-                elems.push_back(sub1);//µ÷ÓÃÁ½´Î¿½±´¹¹Ôìº¯Êı£¬ÒÀ´Î¿½±´test2,test1
+                CustomString sub1 = this->sub(index, length);//è°ƒç”¨ä¸€æ¬¡æ„é€ å‡½æ•°
+                elems.push_back(sub1);//è°ƒç”¨ä¸¤æ¬¡æ‹·è´æ„é€ å‡½æ•°ï¼Œä¾æ¬¡æ‹·è´test2,test1
             }
         }
         else {
             int length = this->_size - index;
-            if (length > 0) {//ÅÅ³ı','ÔÚ×îºóµÄÇé¿ö
-                CustomString sub1 = this->sub(index, length);//µ÷ÓÃÒ»´Î¹¹Ôìº¯Êı
-                elems.push_back(sub1);//µ÷ÓÃÈı´Î¿½±´¹¹Ôìº¯Êı£¬ÒÀ´Î¿½±´test3,test1£¬test2
+            if (length > 0) {//æ’é™¤','åœ¨æœ€åçš„æƒ…å†µ
+                CustomString sub1 = this->sub(index, length);//è°ƒç”¨ä¸€æ¬¡æ„é€ å‡½æ•°
+                elems.push_back(sub1);//è°ƒç”¨ä¸‰æ¬¡æ‹·è´æ„é€ å‡½æ•°ï¼Œä¾æ¬¡æ‹·è´test3,test1ï¼Œtest2
             }
-            //¿½±´test3Ê±·¢ÏÖvector¿Õ¼ä²»×ã(´ËÊ±Îª2)µÄÊ±ºò£¬ÖØĞÂ·ÖÅäÒ»¸ö´óĞ¡ÎªÔ­À´1.5±¶µÄĞÂ¿Õ¼ä£¬½«¾É¿Õ¼äµÄÔªËØÏÈ¿½±´µ½ĞÂ¿Õ¼äºóÔÙ½«test3¿½±´µ½ĞÂ¿Õ¼ä
-            //ÎªÊ²Ã´µ÷ÓÃ¿½±´¹¹Ôìº¯ÊıµÄÊ±ºò»áÏÈÊä³ötest3ÄØ
+            //æ‹·è´test3æ—¶å‘ç°vectorç©ºé—´ä¸è¶³(æ­¤æ—¶ä¸º2)çš„æ—¶å€™ï¼Œé‡æ–°åˆ†é…ä¸€ä¸ªå¤§å°ä¸ºåŸæ¥1.5å€çš„æ–°ç©ºé—´ï¼Œå°†æ—§ç©ºé—´çš„å…ƒç´ å…ˆæ‹·è´åˆ°æ–°ç©ºé—´åå†å°†test3æ‹·è´åˆ°æ–°ç©ºé—´
+            //ä¸ºä»€ä¹ˆè°ƒç”¨æ‹·è´æ„é€ å‡½æ•°çš„æ—¶å€™ä¼šå…ˆè¾“å‡ºtest3å‘¢
         }
         //cout << "Vector Capacity:" << elems.capacity() << endl;
     }
-    CustomString* split_str = new CustomString[elems.size() + 1];//µ÷ÓÃËÄ´Î¹¹Ôìº¯Êı
+    CustomString* split_str = new CustomString[elems.size() + 1];//è°ƒç”¨å››æ¬¡æ„é€ å‡½æ•°
     for (int i = 0; i < elems.size(); i++) {
-        split_str[i] = elems[i];//±»¾¯¸æÁË¶î
+        split_str[i] = elems[i];//è¢«è­¦å‘Šäº†é¢
         //elems[i].print_str();
     }
 
@@ -277,12 +277,12 @@ int main() {
     str2.print_str();
     int index = str1.find("es");
     cout << "Find es in str1: " << index << endl;
-    auto str3 = CustomString(",test1,,test2,,test3,");//µ÷ÓÃÒ»´Î¹¹Ôìº¯Êı
-    CustomString* ret = str3.split(",");//°´','·Ö¸î
+    auto str3 = CustomString(",test1,,test2,,test3,");//è°ƒç”¨ä¸€æ¬¡æ„é€ å‡½æ•°
+    CustomString* ret = str3.split(",");//æŒ‰','åˆ†å‰²
     for (int i = 0; i < ret->len(); i++) {
         ret[i].print_str();
     }
-    CustomString* ret2 = str3.split(",,");//°´',,'·Ö¸î
+    CustomString* ret2 = str3.split(",,");//æŒ‰',,'åˆ†å‰²
     for (int i = 0; i < ret2->len(); i++) {
         ret2[i].print_str();
     }
