@@ -2,7 +2,6 @@
 template<class T>
 class CustomList;
 
-
 template<class P>
 class CustomNode {
 public:

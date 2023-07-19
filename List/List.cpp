@@ -22,7 +22,6 @@ CustomNode<P>::~CustomNode()
 	_next = nullptr;
 }
 
-
 template<class T>
 CustomList<T>::CustomList()
 {

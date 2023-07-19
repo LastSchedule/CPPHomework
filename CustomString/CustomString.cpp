@@ -26,7 +26,7 @@ CustomString::CustomString(const char* another)
         this->_size = strlen(another);
         this->_str = new char[this->_size + 1];
         //strcpy(m_data, str);
-        assert((this->_str != nullptr) && (this->_str != nullptr));
+        assert((this->_str != nullptr) && (another->_str != nullptr));
         char* temp = this->_str;
         while ((*temp++ = *another++) != '\0');
         this->_str[this->_size] = '\0';

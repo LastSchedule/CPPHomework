@@ -1,15 +1,14 @@
 #include<iostream>
 #include"Array.h"
 #include <cassert>
-using std::cout;
-using std::endl;
+using namespace std;
 
-CustomArray::CustomArray():_ptr(nullptr),_size(0),_capacity(0)
+CustomArray::CustomArray() :_ptr(nullptr), _size(0), _capacity(0)
 {
 
 }
 
-CustomArray::CustomArray(const CustomArray& arr)
+CustomArray::CustomArray(const CustomArray& arr) :_ptr(nullptr), _size(0), _capacity(0)
 {
 	if (arr._capacity < 1) return;
 	_size = arr._size;
@@ -18,7 +17,6 @@ CustomArray::CustomArray(const CustomArray& arr)
 	for (int i = 0; i < _size; i++) {
 		_ptr[i] = arr._ptr[i];
 	}
-	//memcpy(_ptr, arr._ptr, sizeof(int) * _size);
 }
 
 CustomArray::~CustomArray()
@@ -45,9 +43,10 @@ const CustomArray& CustomArray::operator = (const CustomArray& arr)
 
 int& CustomArray::operator [](int index)
 {
+	static int error_value = -1;
 	if (index < 0 || index >= _capacity) {
 		cout << "[]中下标非法" << endl;
-		//return ;
+		return error_value;
 	}
 	else
 		return _ptr[index];
@@ -84,10 +83,10 @@ void CustomArray::push(int num)
 	}
 }
 
-void CustomArray::insert(int index,int num)
+void CustomArray::insert(int index, int num)
 {
 	if (_size < _capacity) {
-		for (int i = _size ; i > index; i--) {
+		for (int i = _size; i > index; i--) {
 			_ptr[i] = _ptr[i - 1];
 		}
 		_ptr[index] = num;
@@ -114,7 +113,7 @@ void CustomArray::insert(int index,int num)
 void CustomArray::remove(int value)//vector中的remove是将等于value的元素之后的所有元素前移，但并不减少size
 {
 	int index = -1;
-	index = findIndex(value, index+1);
+	index = findIndex(value, index + 1);
 	while (index != -1) {
 		memmove(_ptr + index, _ptr + index + 1, sizeof(_ptr[0]) * (_size - index - 1));
 		index = findIndex(value, index + 1);
@@ -135,7 +134,7 @@ void CustomArray::clear()//改变大小但不改变容量
 	//_ptr = nullptr;
 }
 
-int CustomArray::findIndex(int value,int index=0)
+int CustomArray::findIndex(int value, int index = 0)
 {
 	assert(index > -1 && index < _size);
 
@@ -156,32 +155,35 @@ void CustomArray::print_capacity()
 	cout << _capacity << endl;
 }
 
-
-
-
 int main()
 {
 	auto arr = new CustomArray();
 	arr->reserve(4);
+
+	cout << "arr->push(1): ";
 	arr->push(1);
-	arr->push(2);
-	//arr->push(1);
-	//arr->push(5);
-	//arr->push(7);
-	//arr->push(9);
-	//arr->push(6);
-	arr->insert(1, 3);
-	arr->remove(1);
-	arr->pop();
-	int index = arr->findIndex(1);
-	cout << index << endl;
-	arr->clear();
-	//arr->print_size();
-	//arr->print_capacity();
 	arr->print_arr();
 
+	cout << "arr->push(2): ";
+	arr->push(2);
+	arr->print_arr();
 
+	cout << "arr->insert(1, 3): ";
+	arr->insert(1, 3);
+	arr->print_arr();
 
+	cout << "arr->remove(1): ";
+	arr->remove(1);
+	arr->print_arr();
 
+	cout << "arr->pop(): ";
+	arr->pop();
+	arr->print_arr();
+
+	cout << "arr->findIndex(1): "<< arr->findIndex(1) << endl;
+
+	cout << "arr->clear(): "<< endl;
+	arr->clear();
+	arr->print_arr();
 	return 0;
 }
