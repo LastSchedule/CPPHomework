@@ -29,8 +29,6 @@ public:
 
 private:
     deque<shared_ptr<Info>> _con;
-    template<typename T>
-    void pop(const T& value);
 };
 
 class Test
@@ -47,7 +45,7 @@ public:
         Test v3;
         Test* v4 = nullptr;
 
-        stack.pop<Test*>(v4);
+        stack.pop(v4);
         stack.pop(v3);
         stack.pop(v2);
         stack.pop(v1);
